@@ -3,7 +3,7 @@
 void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
 
     if (IsKeyDown(KEY_RIGHT)) {
-    	if (posicaoNave.x < 790.0f) { //para não sair da janela
+    	if (posicaoNave.x < 790.0f) {
     		posicaoNave.x += 5.0f;
     	}
     }

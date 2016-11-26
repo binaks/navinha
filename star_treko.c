@@ -1,39 +1,23 @@
 #include "raylib.h"
-#include "nave_funcoes.c"
+#include "geral_funcoes.c"
 
 int main()
 {
-    // Initialization
-
     int screenWidth = 800;
     int screenHeight = 450;
-    //dimensões da janela
 
-    Vector2 posicaoNave = {10.0f, 225.0f};
-    //inicialização da posição da nave, no caso, meio da tela
+    InitWindow(screenWidth, screenHeight, "Star Treko");
+    SetTargetFPS(60);
 
-    Vector2 *nav;
-    nav = &posicaoNave;
-    //ponteiro apontando para a posição da nave
+    IniciarJogo ();
 
-    InitWindow(screenWidth, screenHeight, "Star Treko"); //nome na barra
-    SetTargetFPS(60); //configura o fps
+    while (!WindowShouldClose()) {
 
-    // Main game loop
-    while (!WindowShouldClose()) {    // Detect window close button or ESC key
-
-        Navinha_Desenhar(nav, posicaoNave);
-
-//        Update();
-
-        Navinha_Mover(nav, posicaoNave); 
+        Update();
 
     }
-
-    // De-Initialization
  
-    CloseWindow();        // Close window and OpenGL context
-
+    CloseWindow();
 
     return 0;
 }
