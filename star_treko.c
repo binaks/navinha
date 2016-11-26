@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "nave_funcoes.c"
+#include "geral_funcoes.c"
 
 int main()
 {
