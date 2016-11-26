@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include "geral_funcoes.c"
 #include "nave_funcoes.c"
 
 int main()
@@ -23,19 +22,11 @@ int main()
     // Main game loop
     while (!WindowShouldClose()) {    // Detect window close button or ESC key
 
-        Navinha_Mover(nav, posicaoNave); //mover
-        Navinha_Atirar(nav, posicaoNave); //atirar
+        Navinha_Desenhar(nav, posicaoNave);
 
-        // Draw
+//        Update();
 
-        BeginDrawing(); //essa parte também poderia estar modularizada, né?
-
-            ClearBackground(BLACK); //background
-
-            DrawCircleV(posicaoNave, 10, DARKGRAY); //círculo da nave
-            //posicaoNave indica onde o círculo vai ser desenhado
-
-        EndDrawing();
+        Navinha_Mover(nav, posicaoNave); 
 
     }
 
