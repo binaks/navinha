@@ -1,5 +1,5 @@
 #include "raylib.h"
-#include "navinha_mover.c"
+#include "nave_funcoes.c"
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
     int screenHeight = 450;
     //dimensões da janela
 
-    Vector2 posicaoNave = { (float)screenWidth/2, (float)screenHeight/2 };
+    Vector2 posicaoNave = {10.0f, 225.0f};
     //inicialização da posição da nave, no caso, meio da tela
 
     Vector2 *nav;
@@ -22,18 +22,11 @@ int main()
     // Main game loop
     while (!WindowShouldClose()) {    // Detect window close button or ESC key
 
-        navinha_mover(nav, posicaoNave); //move a nave
+        Navinha_Desenhar(nav, posicaoNave);
 
-        // Draw
+//        Update();
 
-        BeginDrawing(); //essa parte também poderia estar modularizada, né?
-
-            ClearBackground(BLACK); //background
-
-            DrawCircleV(posicaoNave, 10, DARKGRAY); //círculo da nave
-            //posicaoNave indica onde o círculo vai ser desenhado
-
-        EndDrawing();
+        Navinha_Mover(nav, posicaoNave); 
 
     }
 
