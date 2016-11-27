@@ -10,7 +10,7 @@ int main()
     //dimensões da janela
 
     Vector2 posicaoNave = {10.0f, 225.0f};
-    //inicialização da posição da nave, no caso, meio da tela
+    //inicialização da posição da nave
 
     Vector2 *nav;
     nav = &posicaoNave;

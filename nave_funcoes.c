@@ -38,8 +38,6 @@ void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
 
 void Navinha_Desenhar (Vector2 *nav, Vector2 posicaoNave) {
 
-    posicaoNave = *nav;
-
     BeginDrawing();
 
         ClearBackground(BLACK); //background
