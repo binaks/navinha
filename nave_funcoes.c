@@ -1,5 +1,12 @@
 #include "raylib.h"
 
+typedef struct Nave {
+    Vector2 posicao;
+    int vidas;
+} Nave;
+
+static Nave nave;
+
 void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
 
     if (IsKeyDown(KEY_RIGHT)) {

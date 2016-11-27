@@ -8,18 +8,14 @@ typedef struct Tiro {
     Color cor;
 } Tiro;
 
-typedef struct Nave {
-	Vector2 posicao;
-	int vidas;
-} Nave;
-
 static bool gameOver;
 static bool pause;
 
-static Nave nave;
-
 static Vector2 posicaoNave = {10.0f, 225.0f};
 static Vector2 *nav = &posicaoNave;
+
+static Tiro tiro;
+static int tirops;
 
 //void Atirar (Vector2 posicaoTiro) {
 
@@ -50,6 +46,18 @@ void IniciarJogo () {
 	nave.posicao.y = posicaoNave.y;
 	nave.vidas = 3;
 
+	tirops = 0;
+
+//Inicializando tiros
+	tiro.bala.x = nave.posicao.x;
+	tiro.bala.y = nave.posicao.y;
+	tiro.bala.width = 10;
+	tiro.bala.height = 5;
+	tiro.velocidade.x = 7;
+	tiro.velocidade.y = 0;
+	tiro.ativo = false;
+	tiro.cor = MAROON;
+
 }
 
 void Update () {
@@ -67,11 +75,9 @@ void Update () {
 
 		}
 
-/*		for (int i = 0; i < nave.vidas; i++) {
-			BeginDrawing();
+		for (int i = 0; i < nave.vidas; i++) {
 				DrawRectangle (20, 770, 35, 10, LIGHTGRAY);
-			EndDrawing();
-		} */
+		}
 	}
 
 }
