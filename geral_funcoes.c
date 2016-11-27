@@ -2,7 +2,7 @@
 #include "nave_funcoes.c"
 
 typedef struct Tiro {
-    Rectangle tiro;
+    Rectangle bala;
     Vector2 velocidade;
     bool ativo;
     Color cor;
@@ -28,11 +28,16 @@ static Nave nave;
 void IniciarJogo (Vector2 *nav, Vector2 posicaoNave) {
 	//Inicializa as variáveis do jogo
 
-	//Inicializa jogador
-
 	//Inicializa inimigos
 
 	//Inicializa tiros
+
+    int screenWidth = 800;
+    int screenHeight = 450;
+
+    InitWindow(screenWidth, screenHeight, "Star Treko"); //nome na barra
+
+    SetTargetFPS(60); //configura o fps
 
 	gameOver = false;
 	pause = false;
@@ -41,6 +46,8 @@ void IniciarJogo (Vector2 *nav, Vector2 posicaoNave) {
 
 	nave.posicao.x = posicaoNave.x;
 	nave.posicao.y = posicaoNave.y;
+	nave.vidas = 3;
+
 }
 
 void Update (Vector2 *nav, Vector2 posicaoNave) {
@@ -54,6 +61,12 @@ void Update (Vector2 *nav, Vector2 posicaoNave) {
 			Navinha_Mover(nav, posicaoNave); //mover
 //	        Navinha_Atirar(nav, posicaoNave); //atirar
 
+		}
+
+		for (int i = 0; i < nave.vidas; i++) {
+			BeginDrawing();
+				DrawRectangle (20, 770, 35, 10, LIGHTGRAY);
+			EndDrawing();
 		}
 	}
 
