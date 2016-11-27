@@ -11,11 +11,6 @@ static Tiro tiro;
 static int tiros;
 
 void IniciarJogo () {
-	//Inicializa as variáveis do jogo
-
-	//Inicializa inimigos
-
-	//Inicializa tiros
 
     int screenWidth = 800;
     int screenHeight = 450;
@@ -44,6 +39,18 @@ void IniciarJogo () {
 	tiro.velocidade.y = 0;
 	tiro.ativo = false;
 	tiro.cor = MAROON;
+
+//Lógica do tiro
+    if (tiro.ativo) {
+        //Movimento
+        tiro.bala.x += tiro.velocidade.x;
+    	
+    	//sair da tela
+    	if (tiro.bala.x + tiro.bala.width >= screenWidth) {
+    		tiro.ativo = false;
+    		tiros = 0;
+    	}
+    }
 
 }
 
