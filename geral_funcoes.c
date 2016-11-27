@@ -1,13 +1,6 @@
 #include "raylib.h"
 #include "nave_funcoes.c"
 
-typedef struct Tiro {
-    Rectangle bala;
-    Vector2 velocidade;
-    bool ativo;
-    Color cor;
-} Tiro;
-
 static bool gameOver;
 static bool pause;
 
@@ -15,13 +8,7 @@ static Vector2 posicaoNave = {10.0f, 225.0f};
 static Vector2 *nav = &posicaoNave;
 
 static Tiro tiro;
-static int tirops;
-
-//void Atirar (Vector2 posicaoTiro) {
-
-
-
-//}
+static int tiros;
 
 void IniciarJogo () {
 	//Inicializa as variáveis do jogo
@@ -46,7 +33,7 @@ void IniciarJogo () {
 	nave.posicao.y = posicaoNave.y;
 	nave.vidas = 3;
 
-	tirops = 0;
+	tiros = 0;
 
 //Inicializando tiros
 	tiro.bala.x = nave.posicao.x;
@@ -71,7 +58,7 @@ void Update () {
 		if (!pause) {
 
 			Navinha_Mover(nav, posicaoNave); //mover
-//	        Navinha_Atirar(nav, posicaoNave); //atirar
+	        Navinha_Atirar(tiro, tiros); //atirar
 
 		}
 

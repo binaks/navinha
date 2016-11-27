@@ -5,6 +5,13 @@ typedef struct Nave {
     int vidas;
 } Nave;
 
+typedef struct Tiro {
+    Rectangle bala;
+    Vector2 velocidade;
+    bool ativo;
+    Color cor;
+} Tiro;
+
 static Nave nave;
 
 void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
@@ -37,11 +44,17 @@ void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
 
 }
 
-/*void Navinha_Atirar (Vector2 *nav, Vector2 posicaoNave) {
+void Navinha_Atirar (Tiro tiro, int tiros) {
     if (IsKeyDown(KEY_SPACE)) {
-        Atirar (posicaoNave);
+        tiros += 5;
+
+        if (!tiro.ativo && tiros%20 == 0) {
+            tiro.bala.x = nave.posicao.x;
+            tiro.bala.y = nave.posicao.y;
+            tiro.ativo = true;
+        }
     }
-}*/
+}
 
 void Navinha_Desenhar (Vector2 *nav, Vector2 posicaoNave) {
 
