@@ -9,14 +9,14 @@ typedef struct Tiro {
 } Tiro;
 
 typedef struct Nave {
-	Vector2 posicaoNave;
+	Vector2 posicao;
 	int vidas;
 } Nave;
 
 static bool gameOver;
 static bool pause;
 
-//static Nave nave;
+static Nave nave;
 
 
 //void Atirar (Vector2 posicaoTiro) {
@@ -25,7 +25,7 @@ static bool pause;
 
 //}
 
-void IniciarJogo (void) {
+void IniciarJogo (Vector2 *nav, Vector2 posicaoNave) {
 	//Inicializa as variáveis do jogo
 
 	//Inicializa jogador
@@ -36,9 +36,14 @@ void IniciarJogo (void) {
 
 	gameOver = false;
 	pause = false;
+
+	posicaoNave = *nav;
+
+	nave.posicao.x = posicaoNave.x;
+	nave.posicao.y = posicaoNave.y;
 }
 
-void Update (void) {
+void Update (Vector2 *nav, Vector2 posicaoNave) {
 
 	if (!gameOver) {
 
@@ -46,7 +51,7 @@ void Update (void) {
 
 		if (!pause) {
 
-//			Navinha_Mover(nav, posicaoNave); //mover
+			Navinha_Mover(nav, posicaoNave); //mover
 //	        Navinha_Atirar(nav, posicaoNave); //atirar
 
 		}

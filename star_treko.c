@@ -24,9 +24,9 @@ int main()
 
         Navinha_Desenhar(nav, posicaoNave);
 
-//        Update();
+        Update(nav, posicaoNave);
 
-        Navinha_Mover(nav, posicaoNave); 
+//        Navinha_Mover(nav, posicaoNave); 
 
     }
 
