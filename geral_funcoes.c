@@ -15,7 +15,7 @@ typedef struct Inimigos1{
 } Inimigos1;
 
 #define NUM_MAX_INIMIGOS 10
-#define NUM_MAX_TIROS 30
+#define NUM_MAX_TIROS 3000
 
 static bool gameOver;
 static bool pause;
@@ -79,7 +79,7 @@ void Desenhar() {
 	}
 	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
 		if (tiro[i].ativo) {
-			DrawCircleV(nave.posicao, 3, MAROON);
+			DrawCircleV(tiro[i].posicao, 3, MAROON);
 		}
 	}
 }
@@ -101,11 +101,14 @@ void Update () {
 			Desenhar();
 
     		if (IsKeyDown(KEY_SPACE)) {
+    			tiros += 20;
+
         		for (int i = 0; i < NUM_MAX_TIROS; i++) {
-			        if (!tiro[i].ativo) {
-			            tiro[i].posicao.x = nave.posicao.x;
-			            tiro[i].posicao.y = nave.posicao.y;
+			        if (!tiro[i].ativo && tiros%20 == 0) {
 			            tiro[i].ativo = true;
+						tiro[i].posicao.x = posicaoNave.x;
+			            tiro[i].posicao.y = posicaoNave.y;
+			            break;
 			        }
         		}
     		}
@@ -139,7 +142,7 @@ void Update () {
 
 		for (int i = 0; i < nave.vidas; i++) {
 
-				DrawRectangle (20, 770, 35, 10, LIGHTGRAY);
+				DrawRectangle (20, 770, 35, 10, LIGHTGRAY); //não funciona
 
 		}
 	}
