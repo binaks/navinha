@@ -9,6 +9,7 @@ typedef struct Inimigos1{
 } Inimigos1;
 
 #define NUM_MAX_INIMIGOS 10
+#define NUM_MAX_TIROS 10
 
 static bool gameOver;
 static bool pause;
@@ -16,10 +17,10 @@ static bool pause;
 static Vector2 posicaoNave = {10.0f, 225.0f};
 static Vector2 *nav = &posicaoNave;
 
-static Tiro tiro;
 static int tiros;
 
 static Inimigos1 inimigos1[NUM_MAX_INIMIGOS];
+static Tiro tiro[NUM_MAX_TIROS];
 
 void IniciarJogo () {
 
@@ -42,43 +43,49 @@ void IniciarJogo () {
 	tiros = 0;
 
 //Inimigo 1
-for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
-	inimigos1[i].posicao.x = GetRandomValue(screenWidth, screenWidth + 1000);
-	inimigos1[i].posicao.y = GetRandomValue(0, screenHeight - 10);
-	inimigos1[i].velocidade.x = 6;
-	inimigos1[i].velocidade.y = 0;
-	inimigos1[i].ativo = true;
-	inimigos1[i].cor = RED;
-}
+	for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
+		inimigos1[i].posicao.x = GetRandomValue(screenWidth, screenWidth + 1000);
+		inimigos1[i].posicao.y = GetRandomValue(0, screenHeight - 10);
+		inimigos1[i].velocidade.x = 6;
+		inimigos1[i].velocidade.y = 0;
+		inimigos1[i].ativo = true;
+		inimigos1[i].cor = RED;
+	}
 
-//Inicializando tiros
-	tiro.bala.x = nave.posicao.x;
-	tiro.bala.y = nave.posicao.y;
-	tiro.bala.width = 10;
-	tiro.bala.height = 5;
-	tiro.velocidade.x = 7;
-	tiro.velocidade.y = 0;
-	tiro.ativo = false;
-	tiro.cor = MAROON;
+	//Inicializando tiros
+	for (int i = 0; i < NUM_MAX_TIROS; i++) {
+		tiro[i].posicao.x = nave.posicao.x;
+		tiro[i].posicao.y = nave.posicao.y;
+		tiro[i].velocidade.x = 10;
+		tiro[i].velocidade.y = 0;
+		tiro[i].ativo = false;
+		tiro[i].cor = MAROON;
 
-//Lógica do tiro
-    if (tiro.ativo) {
+		if (tiro[i].ativo) {
         //Movimento
-        tiro.bala.x += tiro.velocidade.x;
+        	tiro[i].posicao.x += tiro[i].velocidade.x;
+        }
     	
     	//sair da tela
-    	if (tiro.bala.x + tiro.bala.width >= screenWidth) {
-    		tiro.ativo = false;
+    	if (tiro[i].posicao.x + 1 >= screenWidth) {
+    		tiro[i].ativo = false;
     		tiros = 0;
     	}
-    }
+	}
+
+//Lógica do tiro
 
 }
 
-void DesenharInimigos() {
+void Desenhar() {
     for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
     {
         if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 5, RAYWHITE);
+	}
+	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
+		if (tiro[i].ativo) {
+			DrawCircleV(tiro[i].posicao, 1, MAROON);
+		}
 	}
 }
 
@@ -91,12 +98,21 @@ void Update () {
 		if (IsKeyPressed('P')) pause = !pause;
 
 		Navinha_Desenhar(nav, posicaoNave);
-		DesenharInimigos();
+		Desenhar();
 
 		if (!pause) {
 
 			Navinha_Mover(nav, posicaoNave); //mover
-	        Navinha_Atirar(tiro, tiros); //atirar
+
+    		if (IsKeyDown(KEY_SPACE)) {
+        		for (int i = 0; i < NUM_MAX_TIROS; i++) {
+			        if (!tiro[i].ativo) {
+			            tiro[i].posicao.x = nave.posicao.x;
+			            tiro[i].posicao.y = nave.posicao.y;
+			            tiro[i].ativo = true;
+			        }
+        		}
+    		}
 
 			for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
 				//movimenta os inimigos
