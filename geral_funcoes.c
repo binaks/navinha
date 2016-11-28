@@ -61,16 +61,6 @@ void IniciarJogo () {
 		tiro[i].ativo = false;
 		tiro[i].cor = MAROON;
 
-		if (tiro[i].ativo) {
-        //Movimento
-        	tiro[i].posicao.x += tiro[i].velocidade.x;
-        }
-    	
-    	//sair da tela
-    	if (tiro[i].posicao.x + 1 >= screenWidth) {
-    		tiro[i].ativo = false;
-    		tiros = 0;
-    	}
 	}
 
 //Lógica do tiro
@@ -84,7 +74,7 @@ void Desenhar() {
 	}
 	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
 		if (tiro[i].ativo) {
-			DrawCircleV(tiro[i].posicao, 1, MAROON);
+			DrawCircleV(nave.posicao, 3, MAROON);
 		}
 	}
 }
@@ -98,11 +88,12 @@ void Update () {
 		if (IsKeyPressed('P')) pause = !pause;
 
 		Navinha_Desenhar(nav, posicaoNave);
-		Desenhar();
 
 		if (!pause) {
 
 			Navinha_Mover(nav, posicaoNave); //mover
+
+			Desenhar();
 
     		if (IsKeyDown(KEY_SPACE)) {
         		for (int i = 0; i < NUM_MAX_TIROS; i++) {
@@ -120,7 +111,18 @@ void Update () {
 					inimigos1[i].posicao.x -= inimigos1[i].velocidade.x;
 				}
 			}
-
+			for (int i = 0; i < NUM_MAX_TIROS; i++){
+				if (tiro[i].ativo) {
+		        //Movimento
+		        	tiro[i].posicao.x += tiro[i].velocidade.x;
+		        }
+		    	
+		    	//sair da tela
+		    	if (tiro[i].posicao.x + 1 >= 800) {
+		    		tiro[i].ativo = false;
+		    		tiros = 0;
+		    	}
+		    }
 
 		}
 
