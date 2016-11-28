@@ -4,7 +4,6 @@
 typedef struct Inimigos1{
 	Vector2 posicao;
 	Vector2 velocidade;
-	int vidas;
 	bool ativo;
 	Color cor;
 } Inimigos1;
@@ -42,6 +41,16 @@ void IniciarJogo () {
 
 	tiros = 0;
 
+//Inimigo 1
+for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
+	inimigos1[i].posicao.x = GetRandomValue(screenWidth, screenWidth + 1000);
+	inimigos1[i].posicao.y = GetRandomValue(0, screenHeight - 10);
+	inimigos1[i].velocidade.x = 6;
+	inimigos1[i].velocidade.y = 0;
+	inimigos1[i].ativo = true;
+	inimigos1[i].cor = RED;
+}
+
 //Inicializando tiros
 	tiro.bala.x = nave.posicao.x;
 	tiro.bala.y = nave.posicao.y;
@@ -66,6 +75,13 @@ void IniciarJogo () {
 
 }
 
+void DesenharInimigos() {
+    for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
+    {
+        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 5, RAYWHITE);
+	}
+}
+
 void Update () {
 
     ClearBackground(BLACK); //background
@@ -75,21 +91,17 @@ void Update () {
 		if (IsKeyPressed('P')) pause = !pause;
 
 		Navinha_Desenhar(nav, posicaoNave);
+		DesenharInimigos();
 
 		if (!pause) {
 
 			Navinha_Mover(nav, posicaoNave); //mover
 	        Navinha_Atirar(tiro, tiros); //atirar
 
-			for (int i = 0; i <= NUM_MAX_INIMIGOS; i++){
-				inimigos1[i].ativo = true;
+			for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
 				//movimenta os inimigos
 				if (inimigos1[i].ativo){
 					inimigos1[i].posicao.x -= inimigos1[i].velocidade.x;
-				}
-				//ressucita os inimigos 
-				if (!inimigos1[i].ativo){
-					inimigos1[i].ativo = true; 
 				}
 			}
 
@@ -100,16 +112,6 @@ void Update () {
 
 				DrawRectangle (20, 770, 35, 10, LIGHTGRAY);
 
-		}
-	}
-
-}
-
-void DesenharJogo() { //desenha os inimigos
-
-	for(int i = 0; i <= NUM_MAX_INIMIGOS; i++){
-		if(inimigos1[i].ativo == true) {
-			DrawCircleV(inimigos1[i].posicao, 5, RED);
 		}
 	}
 
