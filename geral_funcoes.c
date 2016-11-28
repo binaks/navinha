@@ -1,15 +1,21 @@
 #include "raylib.h"
 #include "nave_funcoes.c"
 
+typedef struct Tiro {
+    Vector2 posicao;
+    Vector2 velocidade;
+    bool ativo;
+    Color cor;
+} Tiro;
+
 typedef struct Inimigos1{
 	Vector2 posicao;
 	Vector2 velocidade;
 	bool ativo;
-	Color cor;
 } Inimigos1;
 
 #define NUM_MAX_INIMIGOS 10
-#define NUM_MAX_TIROS 10
+#define NUM_MAX_TIROS 30
 
 static bool gameOver;
 static bool pause;
@@ -49,7 +55,6 @@ void IniciarJogo () {
 		inimigos1[i].velocidade.x = 6;
 		inimigos1[i].velocidade.y = 0;
 		inimigos1[i].ativo = true;
-		inimigos1[i].cor = RED;
 	}
 
 	//Inicializando tiros
@@ -108,7 +113,13 @@ void Update () {
 			for (int i = 0; i < NUM_MAX_INIMIGOS; i++){
 				//movimenta os inimigos
 				if (inimigos1[i].ativo){
-					inimigos1[i].posicao.x -= inimigos1[i].velocidade.x;
+					if (inimigos1[i].posicao.x > 0){
+						inimigos1[i].posicao.x -= inimigos1[i].velocidade.x;
+					}
+					else{
+						inimigos1[i].posicao.x += 800;
+						inimigos1[i].posicao.y = GetRandomValue(450, 0);
+					}
 				}
 			}
 			for (int i = 0; i < NUM_MAX_TIROS; i++){

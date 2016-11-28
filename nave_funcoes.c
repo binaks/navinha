@@ -5,13 +5,6 @@ typedef struct Nave {
     int vidas;
 } Nave;
 
-typedef struct Tiro {
-    Vector2 posicao;
-    Vector2 velocidade;
-    bool ativo;
-    Color cor;
-} Tiro;
-
 static Nave nave;
 
 void Navinha_Mover (Vector2 *nav, Vector2 posicaoNave) {
