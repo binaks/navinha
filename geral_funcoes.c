@@ -182,15 +182,6 @@ void Update () {
 	else{
 		 BeginDrawing();
 
-//        	DrawText(FormatText("Inimigos mortos: %04i", nave.pontos), 270, 80, 20, RED);
-//			DrawText(FormatText("Pressione 'A' para continuar"), 200, 220, 30, WHITE);
-//			if(nave.pontos > 50){
-//				DrawText(FormatText("Falta pouco para salvar o universo"), 25, 160, 40, BLUE);
-//			}
-//			else{
-//				DrawText(FormatText("Tente de novo"), 150, 160, 40, BLUE);
-//			}
-
 			if (nave.pontos > high_score) {
 				high_score = nave.pontos;
 			}
@@ -200,7 +191,7 @@ void Update () {
 			High_Score(high_score, score);
 
     	EndDrawing();
-		if(IsKeyPressed('A')){
+		if(IsKeyPressed(KEY_ENTER)){
 			IniciarJogo();
 		}
 	}
