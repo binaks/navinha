@@ -191,7 +191,8 @@ void Update () {
 			High_Score(high_score, score);
 
     	EndDrawing();
-		if(IsKeyPressed(KEY_ENTER)){
+
+		if(IsKeyDown(KEY_ENTER)){
 			IniciarJogo();
 		}
 	}
