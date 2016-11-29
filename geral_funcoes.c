@@ -191,16 +191,16 @@ void Update () {
 //				DrawText(FormatText("Tente de novo"), 150, 160, 40, BLUE);
 //			}
 
+			High_Score(high_score, score);
+
 			if (nave.pontos > high_score) {
 				high_score = nave.pontos;
 			}
 
 			score = nave.pontos;
 
-			High_Score(high_score, score);
-
     	EndDrawing();
-		if(IsKeyPressed('A')){
+		if(IsKeyPressed(KEY_ENTER)){
 			IniciarJogo();
 		}
 	}
