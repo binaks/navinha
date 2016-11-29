@@ -74,22 +74,26 @@ void IniciarJogo () {
 }
 
 void Desenhar() {
-    for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
-    {
-        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 10, MAROON);
-	}
-	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
-		if (tiro[i].ativo) {
-			DrawCircleV(tiro[i].posicao, 3, GREEN);
+
+	    for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
+	    {
+	        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 10, MAROON);
 		}
-	}
+		for (int i = 0; i < NUM_MAX_TIROS; i++) {	
+			if (tiro[i].ativo) {
+				DrawCircleV(tiro[i].posicao, 3, GREEN);
+			}
+		}
 
-	for (int i = 0; i < nave.vidas; i++) {
+		for (int i = 0; i < nave.vidas; i++) {
 
-  		posicaoVidas.x = 20 + (i * 30);
-        DrawCircleV (posicaoVidas, 10, DARKBLUE);
+	  		posicaoVidas.x = 20 + (i * 30);
+	        DrawCircleV (posicaoVidas, 10, DARKBLUE);
 
-    }
+	    }
+
+		DrawText(FormatText("%04i", nave.pontos), 20, 20, 40, GRAY);
+
 }
 
 void Update () {
@@ -138,7 +142,6 @@ void Update () {
 						nave.vidas -= 1;
 						nave.posicao.x = 10.0f;
 						nave.posicao.y = 225.0f;
-						nave.pontos++;
 					}
 
 				}
@@ -153,6 +156,7 @@ void Update () {
 						inimigos1[j].posicao.x += 800;
 						inimigos1[j].posicao.y = GetRandomValue(450, 0);
 						tiro[i].ativo = false;
+						nave.pontos++;
 					}
 				}		        	
 
@@ -162,6 +166,8 @@ void Update () {
 		    	if (tiro[i].posicao.x + 1 >= 800) {
 		    		tiro[i].ativo = false;
 		    	}
+
+//		    	if (nave.vidas == 0) gameOver = true;
 		    }
 
 		}
