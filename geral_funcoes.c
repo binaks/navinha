@@ -20,8 +20,7 @@ typedef struct Inimigos1{
 static bool gameOver;
 static bool pause;
 
-static Vector2 posicaoNave = {10.0f, 225.0f};
-static Vector2 *nav = &posicaoNave;
+static Vector2 *nav = &nave.posicao;
 
 static int tiros;
 
@@ -40,10 +39,10 @@ void IniciarJogo () {
 	gameOver = false;
 	pause = false;
 
-	posicaoNave = *nav;
+	nave.posicao = *nav;
 
-	nave.posicao.x = posicaoNave.x;
-	nave.posicao.y = posicaoNave.y;
+	nave.posicao.x = 10;
+	nave.posicao.y = 225;
 	nave.vidas = 3;
 	nave.pontos = 0;
 
@@ -93,11 +92,11 @@ void Update () {
 
 		if (IsKeyPressed('P')) pause = !pause;
 
-		Navinha_Desenhar(nav, posicaoNave);
+		Navinha_Desenhar(nav);
 
 		if (!pause) {
 
-			Navinha_Mover(nav, posicaoNave); //mover
+			Navinha_Mover(nav); //mover
 
 			Desenhar();
 
@@ -107,8 +106,8 @@ void Update () {
         		for (int i = 0; i < NUM_MAX_TIROS; i++) {
 			        if (!tiro[i].ativo && tiros%20 == 0) {
 			            tiro[i].ativo = true;
-						tiro[i].posicao.x = posicaoNave.x;
-			            tiro[i].posicao.y = posicaoNave.y;
+						tiro[i].posicao.x = nave.posicao.x;
+			            tiro[i].posicao.y = nave.posicao.y;
 			            break;
 			        }
         		}
@@ -125,12 +124,12 @@ void Update () {
 						inimigos1[i].posicao.y = GetRandomValue(450, 0);
 					}
 
-					if (CheckCollisionCircles(posicaoNave,10,inimigos1[i].posicao, 5) ){
+					if (CheckCollisionCircles(nave.posicao,10,inimigos1[i].posicao, 5) ){
 						inimigos1[i].posicao.x += 800;
 						inimigos1[i].posicao.y = GetRandomValue(450, 0);
 						nave.vidas -= 1;
-						posicaoNave.x = 10.0f;
-						posicaoNave.y = 225.0f;
+						nave.posicao.x = 10.0f;
+						nave.posicao.y = 225.0f;
 						nave.pontos++;
 					}
 
