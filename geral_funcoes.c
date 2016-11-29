@@ -21,7 +21,7 @@ static bool gameOver;
 static bool pause;
 
 static Vector2 *nav = &nave.posicao;
-static Vector2 posicaoVidas = {10, 430};
+static Vector2 posicaoVidas = {10, 420};
 
 static int tiros;
 
@@ -87,7 +87,7 @@ void Desenhar() {
 
 		for (int i = 0; i < nave.vidas; i++) {
 
-	  		posicaoVidas.x = 20 + (i * 30);
+	  		posicaoVidas.x = 30 + (i * 30);
 	        DrawCircleV (posicaoVidas, 10, DARKBLUE);
 
 	    }
