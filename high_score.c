@@ -1,21 +1,13 @@
 #include "raylib.h"
 
-typedef enum {SCORE = 0, HIGH_SCORE} Dados;
-
-static int hiscore = 0;
-
-void High_Score (int score) {
-    if (IsKeyPressed(KEY_ENTER)) {
-        StorageSaveValue(SCORE, score);
-        StorageSaveValue(HIGH_SCORE, hiscore);
-    }
+void High_Score (int high_score, int score) {
 
     BeginDrawing();
 
-        ClearBackground(RAYWHITE);
+        ClearBackground(BLACK);
 
         DrawText(FormatText("SCORE: %i", score), 280, 130, 40, MAROON);
-        DrawText(FormatText("HI-SCORE: %i", hiscore), 210, 200, 50, BLACK);
+        DrawText(FormatText("HI-SCORE: %i", high_score), 210, 200, 50, GRAY);
         
         DrawText("Pressione ENTER para salvar", 250, 310, 20, LIGHTGRAY);
 

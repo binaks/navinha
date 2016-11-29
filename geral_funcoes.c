@@ -1,5 +1,6 @@
 #include "raylib.h"
 #include "nave_funcoes.c"
+#include "high_score.c"
 
 typedef struct Tiro {
     Vector2 posicao;
@@ -29,6 +30,7 @@ static Inimigos1 inimigos1[NUM_MAX_INIMIGOS];
 static Tiro tiro[NUM_MAX_TIROS];
 
 static int high_score;
+static int score;
 
 void IniciarJogo () {
 
@@ -180,18 +182,22 @@ void Update () {
 	else{
 		 BeginDrawing();
 
-        	DrawText(FormatText("Inimigos mortos : %04i", nave.pontos), 270, 80, 20, RED);
-			DrawText(FormatText("Clique 'A' para continuar"), 200, 220, 30, WHITE);
-			if(nave.pontos > 50){
-				DrawText(FormatText("Falta pouco para salvar o universo"), 25, 160, 40, BLUE);
-			}
-			else{
-				DrawText(FormatText("Professor, tenta de novo"), 150, 160, 40, BLUE);
-			}
+//        	DrawText(FormatText("Inimigos mortos: %04i", nave.pontos), 270, 80, 20, RED);
+//			DrawText(FormatText("Pressione 'A' para continuar"), 200, 220, 30, WHITE);
+//			if(nave.pontos > 50){
+//				DrawText(FormatText("Falta pouco para salvar o universo"), 25, 160, 40, BLUE);
+//			}
+//			else{
+//				DrawText(FormatText("Tente de novo"), 150, 160, 40, BLUE);
+//			}
 
 			if (nave.pontos > high_score) {
 				high_score = nave.pontos;
 			}
+
+			score = nave.pontos;
+
+			High_Score(high_score, score);
 
     	EndDrawing();
 		if(IsKeyPressed('A')){
