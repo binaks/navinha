@@ -46,7 +46,7 @@ void High_Score (int high_score, int score) {
 
             }
 
-            fprintf (hs, "%s    %i", nome, score);
+            fprintf (hs, "%s -> %i", nome, score);
 
 
 
