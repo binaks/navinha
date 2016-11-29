@@ -14,8 +14,8 @@ typedef struct Inimigos1{
 	bool ativo;
 } Inimigos1;
 
-#define NUM_MAX_INIMIGOS 10
-#define NUM_MAX_TIROS 3000
+#define NUM_MAX_INIMIGOS 30
+#define NUM_MAX_TIROS 300
 
 static bool gameOver;
 static bool pause;
@@ -45,6 +45,7 @@ void IniciarJogo () {
 	nave.posicao.x = posicaoNave.x;
 	nave.posicao.y = posicaoNave.y;
 	nave.vidas = 3;
+	nave.pontos = 0;
 
 	tiros = 0;
 
@@ -75,7 +76,7 @@ void IniciarJogo () {
 void Desenhar() {
     for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
     {
-        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 5, RAYWHITE);
+        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 10, RAYWHITE);
 	}
 	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
 		if (tiro[i].ativo) {
@@ -101,7 +102,7 @@ void Update () {
 			Desenhar();
 
     		if (IsKeyDown(KEY_SPACE)) {
-    			tiros += 20;
+    			tiros += 5;
 
         		for (int i = 0; i < NUM_MAX_TIROS; i++) {
 			        if (!tiro[i].ativo && tiros%20 == 0) {
@@ -123,18 +124,36 @@ void Update () {
 						inimigos1[i].posicao.x += 800;
 						inimigos1[i].posicao.y = GetRandomValue(450, 0);
 					}
+
+					if (CheckCollisionCircles(posicaoNave,10,inimigos1[i].posicao, 5) ){
+						inimigos1[i].posicao.x += 800;
+						inimigos1[i].posicao.y = GetRandomValue(450, 0);
+						nave.vidas -= 1;
+						posicaoNave.x = 10.0f;
+						posicaoNave.y = 225.0f;
+						nave.pontos++;
+					}
+
 				}
 			}
 			for (int i = 0; i < NUM_MAX_TIROS; i++){
 				if (tiro[i].ativo) {
 		        //Movimento
 		        	tiro[i].posicao.x += tiro[i].velocidade.x;
+
+	        	for(int j = 0; j < NUM_MAX_INIMIGOS; j++){
+	        		if (CheckCollisionCircles(tiro[i].posicao, 3, inimigos1[j].posicao, 5) ){
+						inimigos1[j].posicao.x += 800;
+						inimigos1[j].posicao.y = GetRandomValue(450, 0);
+						tiro[i].ativo = false;
+					}
+				}		        	
+
 		        }
 		    	
 		    	//sair da tela
 		    	if (tiro[i].posicao.x + 1 >= 800) {
 		    		tiro[i].ativo = false;
-		    		tiros = 0;
 		    	}
 		    }
 

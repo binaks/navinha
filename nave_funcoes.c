@@ -3,6 +3,7 @@
 typedef struct Nave {
     Vector2 posicao;
     int vidas;
+    int pontos;
 } Nave;
 
 static Nave nave;
