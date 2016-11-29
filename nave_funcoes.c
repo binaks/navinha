@@ -42,7 +42,7 @@ void Navinha_Desenhar (Vector2 *nav) {
 
     BeginDrawing();
 
-        DrawCircleV(nave.posicao, 10, DARKGRAY);
+        DrawCircleV(nave.posicao, 10, BLUE);
 
     EndDrawing();
 

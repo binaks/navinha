@@ -75,11 +75,11 @@ void IniciarJogo () {
 void Desenhar() {
     for (int i = 0;i < NUM_MAX_INIMIGOS; i++)
     {
-        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 10, RAYWHITE);
+        if (inimigos1[i].ativo) DrawCircleV(inimigos1[i].posicao, 10, MAROON);
 	}
 	for (int i = 0; i < NUM_MAX_TIROS; i++) {	
 		if (tiro[i].ativo) {
-			DrawCircleV(tiro[i].posicao, 3, MAROON);
+			DrawCircleV(tiro[i].posicao, 3, GREEN);
 		}
 	}
 }
