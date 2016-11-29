@@ -28,6 +28,8 @@ static int tiros;
 static Inimigos1 inimigos1[NUM_MAX_INIMIGOS];
 static Tiro tiro[NUM_MAX_TIROS];
 
+static int high_score;
+
 void IniciarJogo () {
 
     int screenWidth = 800;
@@ -92,7 +94,8 @@ void Desenhar() {
 
 	    }
 
-		DrawText(FormatText("%04i", nave.pontos), 20, 20, 40, GRAY);
+		DrawText(FormatText("%04i", nave.pontos), 20, 20, 40, LIGHTGRAY);
+		DrawText(FormatText("High Score: %04i", high_score), 20, 60, 20, GRAY);
 
 }
 
@@ -105,12 +108,13 @@ void Update () {
 		if (IsKeyPressed('P')) pause = !pause;
 
 		Navinha_Desenhar(nav);
+		Desenhar();
 
 		if (!pause) {
 
 			Navinha_Mover(nav); //mover
 
-			Desenhar();
+
 
     		if (IsKeyDown(KEY_SPACE)) {
     			tiros += 5;
@@ -167,11 +171,31 @@ void Update () {
 		    		tiro[i].ativo = false;
 		    	}
 
-//		    	if (nave.vidas == 0) gameOver = true;
+		    	if (nave.vidas == 0) gameOver = true;
 		    }
 
 		}
 
 	}
+	else{
+		 BeginDrawing();
 
+        	DrawText(FormatText("Inimigos mortos : %04i", nave.pontos), 270, 80, 20, RED);
+			DrawText(FormatText("Clique 'A' para continuar"), 200, 220, 30, WHITE);
+			if(nave.pontos > 50){
+				DrawText(FormatText("Falta pouco para salvar o universo"), 25, 160, 40, BLUE);
+			}
+			else{
+				DrawText(FormatText("Professor, tenta de novo"), 150, 160, 40, BLUE);
+			}
+
+			if (nave.pontos > high_score) {
+				high_score = nave.pontos;
+			}
+
+    	EndDrawing();
+		if(IsKeyPressed('A')){
+			IniciarJogo();
+		}
+	}
 }
