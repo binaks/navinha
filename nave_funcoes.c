@@ -8,6 +8,7 @@ typedef struct Nave {
 
 static Nave nave;
 
+
 void Navinha_Mover (Vector2 *nav) {
 
     if (IsKeyDown(KEY_RIGHT)) {

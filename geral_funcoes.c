@@ -14,13 +14,14 @@ typedef struct Inimigos1{
 	bool ativo;
 } Inimigos1;
 
-#define NUM_MAX_INIMIGOS 30
+#define NUM_MAX_INIMIGOS 40
 #define NUM_MAX_TIROS 300
 
 static bool gameOver;
 static bool pause;
 
 static Vector2 *nav = &nave.posicao;
+static Vector2 posicaoVidas = {10, 430};
 
 static int tiros;
 
@@ -82,6 +83,13 @@ void Desenhar() {
 			DrawCircleV(tiro[i].posicao, 3, GREEN);
 		}
 	}
+
+	for (int i = 0; i < nave.vidas; i++) {
+
+  		posicaoVidas.x = 20 + (i * 30);
+        DrawCircleV (posicaoVidas, 10, DARKBLUE);
+
+    }
 }
 
 void Update () {
@@ -158,11 +166,6 @@ void Update () {
 
 		}
 
-		for (int i = 0; i < nave.vidas; i++) {
-
-				DrawRectangle (20, 770, 35, 10, LIGHTGRAY); //não funciona
-
-		}
 	}
 
 }
